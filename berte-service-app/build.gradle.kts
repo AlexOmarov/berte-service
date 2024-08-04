@@ -43,7 +43,7 @@ configurations.matching { it.name == "detekt" }.all {
 }
 
 application {
-    mainClass.set("ru.somarov.auth.AppKt")
+    mainClass.set("ru.somarov.berte.AppKt")
 }
 
 ktor {

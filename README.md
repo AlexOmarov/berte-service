@@ -1,7 +1,7 @@
 # Berte Service
 
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_auth-service&metric=coverage)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_auth-service)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_auth-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_auth-service)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_berte-service&metric=coverage)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_berte-service)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_berte-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_berte-service)
 
 ## Содержание
 - [Введение](#Введение)
@@ -84,5 +84,5 @@ Detekt отчет формируется по путям `./build/app/reports/detekt`, `./build/api/rep
 ```bash  
 .\gradlew publishToMavenLocal
 ```  
-В результате выполнения команды в .m2 папке пользователя появится артефакт auth-service-api, который будет содержать все  
+В результате выполнения команды в .m2 папке пользователя появится артефакт berte-service-api, который будет содержать все  
 необходимые dto-классы, proto-файлы и другие нужные для взаимодействия с сервисом интерфейсы.  

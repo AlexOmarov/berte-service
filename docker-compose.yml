@@ -4,7 +4,7 @@ services:
     # Uncomment to use prebuilt srcs instead of image
     build:
      context: .
-    # image: decentboat/auth-service:latest
+    # image: decentboat/berte-service:latest
     healthcheck:
       test: "wget --no-verbose --tries=1 --spider localhost:8080/health || exit 1"
       interval: 5s
@@ -30,9 +30,9 @@ services:
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_PASSWORD: auth_service
-      POSTGRES_USER: auth_service
-      POSTGRES_DB: auth_service
+      POSTGRES_PASSWORD: berte_service
+      POSTGRES_USER: berte_service
+      POSTGRES_DB: berte_service
     command: postgres -c shared_preload_libraries='pg_stat_statements'
     volumes:
       - pg_data:/var/lib/postgresql/data

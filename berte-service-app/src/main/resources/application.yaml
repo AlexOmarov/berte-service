@@ -3,16 +3,16 @@ ktor:
     port: 8080
   application:
     modules:
-      - ru.somarov.auth.infrastructure.config.ApplicationConfigKt.config
-  name: "$APP_NAME:auth-service"
+      - ru.somarov.berte.infrastructure.config.ApplicationConfigKt.config
+  name: "$APP_NAME:berte-service"
   instance: "$HOSTNAME:undefined"
   db:
     host: "$DB_HOST:localhost"
     port: "$DB_PORT:5432"
-    name: "$DB_NAME:auth_service"
-    schema: "$DB_SCHEMA:auth_service"
-    user: "$DB_USER:auth_service"
-    password: "$DB_PASSWORD:auth_service"
+    name: "$DB_NAME:berte_service"
+    schema: "$DB_SCHEMA:berte_service"
+    user: "$DB_USER:berte_service"
+    password: "$DB_PASSWORD:berte_service"
     connection-timeout: "$DB_CONNECTION_TIMEOUT:PT5S"
     statement-timeout: "$DB_STATEMENT_TIMEOUT:PT5S"
     pool:
@@ -26,11 +26,11 @@ ktor:
     producers:
       retry:
         enabled: "$KAFKA_RETRY_PRODUCING_ENABLED:false"
-        topic: "auth_service_retry"
+        topic: "berte_service_retry"
         max-in-flight: "1"
       dlq:
         enabled: "$KAFKA_RETRY_DLQ_ENABLED:false"
-        topic: "auth_service_dlq"
+        topic: "berte_service_dlq"
         max-in-flight: "1"
   otel:
     protocol: "http"
