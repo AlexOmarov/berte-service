@@ -1,0 +1,51 @@
+stages:
+  - build
+  - test
+  - notify
+
+image: "gradle:8.11.0-jdk21-alpine"
+
+build:
+  stage: build
+  script: ./gradlew build
+  cache:
+    key:
+      files:
+        - gradle/wrapper/gradle-wrapper.properties
+    paths:
+      - .gradle/caches
+      - .gradle/notifications
+      - .gradle/wrapper
+    policy: pull-push
+
+test:
+  stage: test
+  script: ./gradlew test
+
+scan:
+  stage: test
+  script:
+    - > 
+      ./gradlew sonar 
+      -D"sonar.host.url=$SONAR_HOST_URL" 
+      -D"sonar.token=$SONAR_TOKEN" 
+      -D"sonar.projectKey=$SONAR_PROJECT_KEY" 
+      -D"sonar.organization=$SONAR_ORG"
+
+notify:
+  stage: notify
+  script:
+    - echo "Sending notification to Telegram"
+    - >
+      curl -X POST "https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage" 
+      -d "chat_id=${TELEGRAM_TO}" 
+      -d "text=${GITLAB_USER_NAME} -> ${CI_PROJECT_PATH}\n\n${CI_COMMIT_MESSAGE}\n\n*${CI_JOB_STATUS}*\n\nSee changes: ${CI_REPOSITORY_URL}/commit/${CI_COMMIT_SHA}" 
+      -d "parse_mode=Markdown"
+
+# noinspection ComposeMissingKeys
+include:
+  - template: Jobs/SAST.gitlab-ci.yml
+  - template: Jobs/Secret-Detection.gitlab-ci.yml
+  - template: Security/SAST-IaC.gitlab-ci.yml
+  - template: Security/Dependency-Scanning.gitlab-ci.yml
+

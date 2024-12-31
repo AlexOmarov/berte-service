@@ -45,6 +45,6 @@ bin/
 /docs/.swagger-codegen-ignore
 /docs/index.html
 /docs/.swagger-codegen/VERSION
-/berte-service-app/docs/.swagger-codegen-ignore
-/berte-service-app/docs/index.html
-/berte-service-app/docs/.swagger-codegen/VERSION
+/*/docs/.swagger-codegen-ignore
+/*/docs/index.html
+/*/docs/.swagger-codegen/VERSION

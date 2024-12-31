@@ -1,7 +1,9 @@
 # Berte Service
 
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_berte-service&metric=coverage)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_berte-service)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_berte-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_berte-service)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_auth-service&metric=coverage)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_auth-service)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AlexOmarov_auth-service&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AlexOmarov_auth-service)
+
+Ktor-сервис для PoC решений в области аутентификации/авторизации
 
 ## Содержание
 - [Введение](#Введение)
@@ -12,7 +14,12 @@
 - [Публикация](#Публикация)
 
 ### Введение
-TODO: Добавить краткое описание функций
+Проект содержит исходный код и docker-compose файл для развертки сервиса и окружения.
+
+Основные функции сервиса:
+- управление ЖЦ системных (не персональных) данных учётной записи клиента;
+- аутентификация клиента;
+- предоставление данных для авторизации клиента в смежных системах.
 
 Процесс импорта проекта в IntellijIDEA не требует дополнительных настроек локальной среды.   
 Проект может быть импортирован в IDE с помощью меню `File->New->Project from existing sources->Gradle`.
@@ -39,8 +46,8 @@ Compose включает в себя следующие инструменты, каждый из которых доступен для по
 
 #### Локальная развертка
 Сервис может разворачиваться и локально, с использованием собранного исходного кода вместо docker-образа.
-Для этого необходимо изначально провести развертку с использованием Docker compose файла, 
-после этого удалить контейнер с сервисом (service), 
+Для этого необходимо изначально провести развертку с использованием Docker compose файла,
+после этого удалить контейнер с сервисом (service),
 собрать проект и запустить его либо через IDE, либо внеся изменения в docker compose файл -
 раскомментировать строки build/context контейнера service и убрать настройку образа.
 
@@ -50,14 +57,14 @@ Compose включает в себя следующие инструменты, каждый из которых доступен для по
 API использует форматы данных Cbor и Json, выбирается в зависимости от переданных заголовков.
 
 ### Использование code-quality инструментов
-Когда проект собирается с использованием `build` задачи gradle detekt и ktlint проверки проходят автоматически. 
+Когда проект собирается с использованием `build` задачи gradle detekt и ktlint проверки проходят автоматически.
 Detekt отчет формируется по путям `./build/app/reports/detekt`, `./build/api/reports/detekt`.  
 Также есть возможность запускать проверки вручную командой
 ```bash  
 .\gradlew detekt
 ```  
 
-Тестирование и измерение покрытия также проходят автоматически при вызове команды `build`. 
+Тестирование и измерение покрытия также проходят автоматически при вызове команды `build`.
 Покрытие измеряется инструментом kover, который в свою очередь использует движок JaCoCo.  
 Отчеты по покрытию (xml для sonar-инструментов и html для локальной разработки)  
 формируются по путям `./build/app/reports/kover/report.xml`, `./build/app/reports/kover/html/index.html`.  
@@ -84,5 +91,5 @@ Detekt отчет формируется по путям `./build/app/reports/detekt`, `./build/api/rep
 ```bash  
 .\gradlew publishToMavenLocal
 ```  
-В результате выполнения команды в .m2 папке пользователя появится артефакт berte-service-api, который будет содержать все  
-необходимые dto-классы, proto-файлы и другие нужные для взаимодействия с сервисом интерфейсы.  
+В результате выполнения команды в .m2 папке пользователя появится артефакт auth-service-api, который будет содержать все  
+необходимые dto-классы, proto-файлы и другие нужные для взаимодействия с сервисом интерфейсы.

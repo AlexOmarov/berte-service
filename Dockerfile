@@ -1,3 +1,4 @@
+# todo: put 23 when kotlin and detekt will support it
 FROM bellsoft/liberica-runtime-container:jre-21-crac-slim-glibc
 
 RUN addgroup --system --gid 800 appuser && adduser --system --uid 800 appuser
@@ -8,12 +9,13 @@ RUN chmod 755 /docs
 
 USER appuser
 
-COPY ./berte-service-app/build/libs/app.jar /app.jar
+COPY ./news-service-app/build/libs/app.jar /app.jar
 
 EXPOSE 8080 9010 9090 7000
 
 ENTRYPOINT ["java", \
-    "-XX:+HeapDumpOnOutOfMemoryError", "-XX:HeapDumpPath=/var/dumps", \
+    "-XX:+HeapDumpOnOutOfMemoryError", \
+    "-XX:HeapDumpPath=/var/dumps", \
     "-Djava.security.egd=file:/dev/./urandom", \
     "-Dcom.sun.management.jmxremote", \
     "-Dcom.sun.management.jmxremote.port=9010", \
@@ -22,4 +24,4 @@ ENTRYPOINT ["java", \
     "-Dcom.sun.management.jmxremote.authenticate=false", \
     "-Dcom.sun.management.jmxremote.ssl=false", \
     "-Djava.rmi.server.hostname=0.0.0.0", \
-    "-jar","/app.jar"]
+    "-jar", "/app.jar"]
